@@ -3,4 +3,4 @@ skops
 pandas
 matplotlib
 black
-pickle
+joblib
