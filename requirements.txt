@@ -3,3 +3,4 @@ skops
 pandas
 matplotlib
 black
+pickle
