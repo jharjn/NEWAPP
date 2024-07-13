@@ -68,4 +68,11 @@ import skops.io as sio
 
 sio.dump(pipe, "drug_pipeline.skops")
 
-sio.load("drug_pipeline.skops", trusted=True)
+# Load the model, specifying trusted types
+untrusted_types = sio.get_untrusted_types("drug_pipeline.skops")
+trusted_types = [t for t in untrusted_types if should_be_trusted(t)]  # Implement should_be_trusted as needed
+
+# Or if you trust all types, though it's less secure:
+trusted_types = untrusted_types
+
+sio.load("drug_pipeline.skops", trusted=trusted_types)
