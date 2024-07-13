@@ -4,6 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OrdinalEncoder, StandardScaler
+import pickle
 
 drug_df = pd.read_csv("Data/drug.csv")
 drug_df = drug_df.sample(frac=1)
@@ -66,13 +67,9 @@ plt.savefig("Results/model_results.png", dpi=120)
 
 import skops.io as sio
 
-sio.dump(pipe, "drug_pipeline.skops")
 
-# Get the list of untrusted types
-untrusted_types = sio.get_untrusted_types()
+pickle.dump(pipe, "drug_pipeline.pkl")
 
-# Assuming you trust all types (less secure)
-trusted_types = untrusted_types
 
-# Load the model with trusted types
-model = sio.load("drug_pipeline.skops", trusted=trusted_types)
+with open("drug_pipeline.pkl", "rb") as file:
+    model = pickle.load(file)
