@@ -65,11 +65,10 @@ disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=pipe.classes_)
 disp.plot()
 plt.savefig("Results/model_results.png", dpi=120)
 
-import skops.io as sio
+import joblib
 
 
-pickle.dump(pipe, "drug_pipeline.pkl")
+joblib.dump(pipe, "drug_pipeline.pkl")
 
 
-with open("drug_pipeline.pkl", "rb") as file:
-    model = pickle.load(file)
+
